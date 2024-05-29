@@ -32,6 +32,6 @@ struct WelcomeView: View{
             
         } .frame(maxWidth:.infinity,maxHeight:.infinity)
     }
-        }
+}
 
-//
+

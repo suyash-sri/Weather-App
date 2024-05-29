@@ -11,7 +11,12 @@ import SwiftUI
 struct WeatherView: View {
 
     var weather: ResponseBody
-    
+    @StateObject private var viewModel: WeatherViewModel
+
+    init(weather: ResponseBody) {
+        self.weather = weather
+        _viewModel = StateObject(wrappedValue: WeatherViewModel(weather: weather))
+    }
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -20,7 +25,7 @@ struct WeatherView: View {
                         .bold()
                         .font(.title)
                     
-                    Text("Today, \(Date().formatted(.dateTime.month().day().hour().minute()))")
+                    Text("Today, \(viewModel.dateString))")
                         .fontWeight(.light)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,13 +38,14 @@ struct WeatherView: View {
                             Image(systemName: "cloud")
                                 .font(.system(size: 40))
                             
-                            Text("\(weather.weather[0].main)")
+                            Text("\(viewModel.weatherMain)")
                         }
                         .frame(width: 150, alignment: .leading)
                         
                         Spacer()
                         
-                        Text(String(format: "%.0f°", weather.main.feelsLike))                            .font(.system(size: 100))
+                        Text(viewModel.feelsLike)                            
+                            .font(.system(size: 100))
                             .fontWeight(.bold)
                             .padding()
                     }
@@ -70,24 +76,24 @@ struct WeatherView: View {
                         .bold()
                         .padding(.bottom)
                     
-//                    HStack {
-//                        WeatherRow(logo: "thermometer", name: "Min temp", value: (weather.main.tempMin.roundDouble() + ("°")))
-//                        Spacer()
-//                        WeatherRow(logo: "thermometer", name: "Max temp", value: (weather.main.tempMax.roundDouble() + "°"))
-//                    }
-//                    
-//                    HStack {
-//                        WeatherRow(logo: "wind", name: "Wind speed", value: (weather.wind.speed.roundDouble() + " m/s"))
-//                        Spacer()
-//                        WeatherRow(logo: "humidity", name: "Humidity", value: "\(weather.main.humidity.roundDouble())%")
-//                    }
+                    HStack {
+                        WeatherRow(logo: "thermometer", name: "Min temp", value: viewModel.weatherMinTemp )
+                        Spacer()
+                        WeatherRow(logo: "thermometer", name: "Max temp", value: viewModel.weatherMaxTemp)
+                    }
+                    
+                    HStack {
+                        WeatherRow(logo: "wind", name: "Wind speed", value: viewModel.windSpeed)
+                        Spacer()
+                        WeatherRow(logo: "humidity", name: "Humidity", value: viewModel.humidity)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.bottom, 20)
                 .foregroundColor(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
                 .background(.white)
-//                .cornerRadius(20, corners: [.topLeft, .topRight])
+
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -96,8 +102,22 @@ struct WeatherView: View {
     }
 }
 
-//struct WeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeatherView(weather: previewWeather)
-//    }
-//}
+struct WeatherRow: View {
+    let logo: String
+    let name: String
+    let value: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: logo)
+                .foregroundColor(.blue)
+                .font(.system(size: 20))
+    
+            Text(name)
+            Spacer()
+            Text(value)
+          
+        }
+        .padding(.horizontal)
+    }
+}
