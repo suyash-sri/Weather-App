@@ -5,20 +5,17 @@
 //  Created by Suyash Srivastav on 28/05/24.
 //
 
-
 import SwiftUI
 
 struct WeatherView: View {
-
     var weather: ResponseBody
     @StateObject private var viewModel: WeatherViewModel
-    @State var GoTONext: Bool=false
+    @State var goToNext: Bool=false
     var latitude: Double?
     var longitude: Double?
-    
     init(weather: ResponseBody) {
         self.weather = weather
-
+        
         _viewModel = StateObject(wrappedValue: WeatherViewModel(weather: weather))
     }
     var body: some View {
@@ -37,58 +34,73 @@ struct WeatherView: View {
                     
                     Spacer()
                     
-                    VStack {
-                        HStack {
-                            VStack(spacing: 20) {
-                                Image(systemName: "cloud")
-                                    .font(.system(size: 40))
+                     VStack {
+                         HStack {
+                             VStack(spacing: 20) {
+                                 Image(systemName: "cloud")
+                                     .font(.system(size: 40))
                                 
-                                Text("\(viewModel.weatherMain)")
-                            }
-                            .frame(width: 150, alignment: .leading)
+                                 Text("\(viewModel.weatherMain)")
+                             }
+                             .frame(width: 150, alignment: .leading)
                             
-                            Spacer()
+                             Spacer()
                             
-                            Text(viewModel.feelsLike)
-                                .font(.system(size: 100))
-                                .fontWeight(.bold)
-                                .padding()
-                        }
-                    
-                        Spacer()
-                            .frame(height:  80)
+                             Text(viewModel.feelsLike)
+                                 .font(.system(size: 100))
+                                 .fontWeight(.bold)
+                                 .padding()
+                         }
                         
-                        AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2020/01/24/21/33/city-4791269_960_720.png")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 350)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        Button(action: {
-                            print("Sign In button tapped")
-                            GoTONext = true
-                        }) {
-                            HStack {
-                                Text("Choose different location")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
-                      
-                            }
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                        }
-
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                         Spacer()
+                             .frame(height:  80)
+                        
+                         AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2020/01/24/21/33/city-4791269_960_720.png")) { image in
+                             image
+                                 .resizable()
+                                 .aspectRatio(contentMode: .fit)
+                                 .frame(width: 350)
+                         } placeholder: {
+                             ProgressView()
+                         }
+                         Button(action: {
+                             print("Sign In button tapped")
+                             goToNext = true
+                         }) {
+                             HStack {
+                                 Text("Choose different location")
+                                     .font(.system(size: 16, weight: .semibold))
+                                     .foregroundColor(.white)
+                                
+                             }
+                             .padding()
+                             .background(Color.blue)
+                             .cornerRadius(10)
+                             .shadow(radius: 5)
+                         }
+                        
+                         Spacer()
+                     }
+                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
+                WeatherBottom(viewModel: viewModel)
+
+            }
+            .edgesIgnoringSafeArea(.bottom)
+            .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
+            .preferredColorScheme(.dark)
+            .navigationDestination(isPresented: $goToNext) { ChooseLocation()
+            }
+        }
+    }
+    
+}
+
+struct WeatherBottom: View{
+    @State var viewModel:WeatherViewModel
+    var body: some View{
                 VStack {
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
@@ -113,35 +125,26 @@ struct WeatherView: View {
                     .padding(.bottom, 20)
                     .foregroundColor(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
                     .background(.white)
-
+                    
                 }
-            }
-            .edgesIgnoringSafeArea(.bottom)
-            .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
-            .preferredColorScheme(.dark)
-                .navigationDestination(isPresented: $GoTONext) { ChooseLocation()
-                }
-        }
     }
-      
 }
-
 
 struct WeatherRow: View {
     let logo: String
     let name: String
     let value: String
-
+    
     var body: some View {
         HStack {
             Image(systemName: logo)
                 .foregroundColor(.blue)
                 .font(.system(size: 20))
-    
+            
             Text(name)
             Spacer()
             Text(value)
-          
+            
         }
         .padding(.horizontal)
     }
