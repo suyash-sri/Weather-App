@@ -15,7 +15,6 @@ struct WeatherView: View {
     var longitude: Double?
     init(weather: ResponseBody) {
         self.weather = weather
-        
         _viewModel = StateObject(wrappedValue: WeatherViewModel(weather: weather))
     }
     var body: some View {
@@ -31,62 +30,59 @@ struct WeatherView: View {
                             .fontWeight(.light)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
                     Spacer()
-                    
-                     VStack {
-                         HStack {
-                             VStack(spacing: 20) {
-                                 Image(systemName: "cloud")
-                                     .font(.system(size: 40))
+                    VStack {
+                        HStack {
+                            VStack(spacing: 20) {
+                                Image(systemName: "cloud")
+                                    .font(.system(size: 40))
                                 
-                                 Text("\(viewModel.weatherMain)")
-                             }
-                             .frame(width: 150, alignment: .leading)
+                                Text("\(viewModel.weatherMain)")
+                            }
+                            .frame(width: 150, alignment: .leading)
                             
-                             Spacer()
+                            Spacer()
                             
-                             Text(viewModel.feelsLike)
-                                 .font(.system(size: 100))
-                                 .fontWeight(.bold)
-                                 .padding()
-                         }
+                            Text(viewModel.feelsLike)
+                                .font(.system(size: 100))
+                                .fontWeight(.bold)
+                                .padding()
+                        }
+                        Spacer()
+                            .frame(height:  80)
                         
-                         Spacer()
-                             .frame(height:  80)
-                        
-                         AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2020/01/24/21/33/city-4791269_960_720.png")) { image in
-                             image
-                                 .resizable()
-                                 .aspectRatio(contentMode: .fit)
-                                 .frame(width: 350)
-                         } placeholder: {
-                             ProgressView()
-                         }
-                         Button(action: {
-                             print("Sign In button tapped")
-                             goToNext = true
-                         }) {
-                             HStack {
-                                 Text("Choose different location")
-                                     .font(.system(size: 16, weight: .semibold))
-                                     .foregroundColor(.white)
+                        AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2020/01/24/21/33/city-4791269_960_720.png")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 350)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        Button(action: {
+                            print("Sign In button tapped")
+                            goToNext = true
+                        }) {
+                            HStack {
+                                Text("Choose different location")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.white)
                                 
-                             }
-                             .padding()
-                             .background(Color.blue)
-                             .cornerRadius(10)
-                             .shadow(radius: 5)
-                         }
+                            }
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        }
                         
-                         Spacer()
-                     }
-                     .frame(maxWidth: .infinity, alignment: .trailing)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 WeatherBottom(viewModel: viewModel)
-
+                
             }
             .edgesIgnoringSafeArea(.bottom)
             .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
@@ -101,32 +97,32 @@ struct WeatherView: View {
 struct WeatherBottom: View{
     @State var viewModel:WeatherViewModel
     var body: some View{
-                VStack {
+        VStack {
+            Spacer()
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Weather now")
+                    .bold()
+                    .padding(.bottom)
+                
+                HStack {
+                    WeatherRow(logo: "thermometer", name: "Min temp", value: viewModel.weatherMinTemp )
                     Spacer()
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Weather now")
-                            .bold()
-                            .padding(.bottom)
-                        
-                        HStack {
-                            WeatherRow(logo: "thermometer", name: "Min temp", value: viewModel.weatherMinTemp )
-                            Spacer()
-                            WeatherRow(logo: "thermometer", name: "Max temp", value: viewModel.weatherMaxTemp)
-                        }
-                        
-                        HStack {
-                            WeatherRow(logo: "wind", name: "Wind speed", value: viewModel.windSpeed)
-                            Spacer()
-                            WeatherRow(logo: "humidity", name: "Humidity", value: viewModel.humidity)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .padding(.bottom, 20)
-                    .foregroundColor(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
-                    .background(.white)
-                    
+                    WeatherRow(logo: "thermometer", name: "Max temp", value: viewModel.weatherMaxTemp)
                 }
+                
+                HStack {
+                    WeatherRow(logo: "wind", name: "Wind speed", value: viewModel.windSpeed)
+                    Spacer()
+                    WeatherRow(logo: "humidity", name: "Humidity", value: viewModel.humidity)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .padding(.bottom, 20)
+            .foregroundColor(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
+            .background(.white)
+            
+        }
     }
 }
 

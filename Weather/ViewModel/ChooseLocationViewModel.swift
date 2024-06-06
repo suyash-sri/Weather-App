@@ -34,13 +34,9 @@ class ChooseLocationViewModel:ObservableObject{
     }
     
     func navigateToNext() async {
-        print("1")
         do {
-            print("2")
-            
             weather = try await weatherManager.getCurrentWeather(latitude: selectedCoordinat?.latitude ??  37.7, longitude: selectedCoordinat?.longitude ?? -122.4194 )
             navigateToWeatherView = true
-            print("3")
         } catch {
             print("Error fetching weather: \(error)")
         }
