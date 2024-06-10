@@ -18,10 +18,12 @@
 		045007722C04A37700E9585C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045007712C04A37700E9585C /* WelcomeView.swift */; };
 		045007742C04B57D00E9585C /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045007732C04B57D00E9585C /* WeatherManager.swift */; };
 		045007772C04BD0900E9585C /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045007762C04BD0900E9585C /* WeatherModel.swift */; };
+		048AEB9A2C104A5B009813CA /* ChooseLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048AEB992C104A5B009813CA /* ChooseLocationViewModel.swift */; };
 		04CF529C2C05A5CA00A78161 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF529B2C05A5CA00A78161 /* WeatherViewModel.swift */; };
 		04CF529E2C05C41600A78161 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF529D2C05C41600A78161 /* WeatherView.swift */; };
 		04CF52A52C05DDB800A78161 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 04CF52A42C05DDB800A78161 /* Config.xcconfig */; };
 		04CF52A62C05DDB800A78161 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 04CF52A42C05DDB800A78161 /* Config.xcconfig */; };
+		04CF52A92C07A7A500A78161 /* ChooseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF52A82C07A7A500A78161 /* ChooseLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +59,12 @@
 		045007712C04A37700E9585C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		045007732C04B57D00E9585C /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		045007762C04BD0900E9585C /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		048AEB992C104A5B009813CA /* ChooseLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewModel.swift; sourceTree = "<group>"; };
 		04CF529B2C05A5CA00A78161 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		04CF529D2C05C41600A78161 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		04CF52A42C05DDB800A78161 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		04CF52A72C05E37C00A78161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		04CF52A82C07A7A500A78161 /* ChooseLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 				045007442C04911D00E9585C /* ContentView.swift */,
 				045007712C04A37700E9585C /* WelcomeView.swift */,
 				04CF529D2C05C41600A78161 /* WeatherView.swift */,
+				04CF52A82C07A7A500A78161 /* ChooseLocation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF529B2C05A5CA00A78161 /* WeatherViewModel.swift */,
+				048AEB992C104A5B009813CA /* ChooseLocationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -318,12 +324,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				045007452C04911D00E9585C /* ContentView.swift in Sources */,
+				04CF52A92C07A7A500A78161 /* ChooseLocation.swift in Sources */,
 				045007432C04911D00E9585C /* WeatherApp.swift in Sources */,
 				045007742C04B57D00E9585C /* WeatherManager.swift in Sources */,
 				04CF529C2C05A5CA00A78161 /* WeatherViewModel.swift in Sources */,
 				0450076F2C04941300E9585C /* LoacationManager.swift in Sources */,
 				045007772C04BD0900E9585C /* WeatherModel.swift in Sources */,
 				045007722C04A37700E9585C /* WelcomeView.swift in Sources */,
+				048AEB9A2C104A5B009813CA /* ChooseLocationViewModel.swift in Sources */,
 				04CF529E2C05C41600A78161 /* WeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
